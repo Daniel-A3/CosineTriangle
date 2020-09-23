@@ -4,36 +4,34 @@
 
 #cosine rule for missing ANGLE : Cos(A) = (b^2 + c^2 - a^2) / 2bc
 
-import math, sys
+import math
 
 def missingAngle():
-    sideA = int(input("size of side a = "))
-    sideB = int(input("size of side b = "))
-    sideC = int(input("size of side c = "))
-
-    answer = math.cos((sideB**2 + sideC**2 - sideA**2) / 2 * sideB * sideC)
-
-    return answer
+    sideA = float(input("size of side a = "))
+    sideB = float(input("size of side b = "))
+    sideC = float(input("size of side c = "))
+    try:
+        answer = math.acos((sideB**2 + sideC**2 - sideA**2) / (2 * sideB * sideC))
+        return f'Your answer is: {math.degrees(answer):.2f} degrees'
+    except ValueError:
+        return 'Values given cannot form a triangle'
 
 def missingSide():
-    angleA = int(input("size of angle A = "))
-    sideB = int(input("size of side b = "))
-    sideC = int(input("size of side c = "))
+    angleA = math.radians(float(input("size of angle A (degrees) = ")))
+    sideB = float(input("size of side b = "))
+    sideC = float(input("size of side c = "))
 
     answer = math.sqrt(sideB**2 + sideC**2 - 2 * sideB * sideC * math.cos(angleA))
+    return f'Your answer is: {answer:.2f} units'
 
-    return answer
-
-missingSideOrAngle = input("Are you trying to work out the missing angle or side?(Angle/Side) = ")
 
 while True:
+    missingSideOrAngle = input("Are you trying to work out the missing angle or side?(Angle/Side) = ")
     if missingSideOrAngle.title() == "Angle":
-        print("Your answer is = " + str(missingAngle()))
-        sys.exit()
+        print(missingAngle())
 
     elif missingSideOrAngle.title() == "Side":
-        print("Your answer is = " + str(missingSide()))
-        sys.exit()
+        print(missingSide())
 
     else:
         missingSideOrAngle = input("Please enter a valid string(Angle/Side) = ")
